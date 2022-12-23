@@ -3,7 +3,7 @@ import { GlobalStyles } from "../../constans/styles";
 
 function ExpensesSummary({ expenses, periodName }) {
   const expensesSum = expenses.reduce((sum, expense) => {
-    return sum + expense.amount;
+    return sum + parseInt(expense.amount);
   }, 0);
 
   return (

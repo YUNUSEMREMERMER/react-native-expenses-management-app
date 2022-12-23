@@ -1,6 +1,7 @@
 import { useLayoutEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useDispatch } from "react-redux";
+import ExpenseForm from "../components/ManageExpense/ExpenseForm";
 import Button from "../components/UI/Button";
 import IconButton from "../components/UI/IconButton";
 import { GlobalStyles } from "../constans/styles";
@@ -21,35 +22,10 @@ function ManageExpense({ route, navigation }) {
     dispatch(removeExpense({ id: editedExpenseId }));
     navigation.goBack();
   }
-  function cancelHandler() {
-    navigation.goBack();
-  }
-  function confirmHandler() {
-    if (isEditing) {
-      return;
-    } else {
-      dispatch(
-        addExpense({
-          expense: {
-            id: "e10",
-            description: "A pair of shoes",
-            amount: 59.99,
-            date: new Date("2022-12-20"),
-          },
-        })
-      );
-      navigation.goBack();
-    }
-  }
 
   return (
     <View style={styles.container}>
-      <View>
-        <Button mode="flat" onPress={cancelHandler}>
-          Cancel
-        </Button>
-        <Button onPress={confirmHandler}>{isEditing ? "Update" : "Add"}</Button>
-      </View>
+      <ExpenseForm editedExpenseId={editedExpenseId} isEditing={isEditing} />
       {isEditing && (
         <View style={styles.deleteContainer}>
           <IconButton
